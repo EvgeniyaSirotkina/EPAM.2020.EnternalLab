@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[EventArea]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
+	[EventId] INT NOT NULL,
+	[Description] NVARCHAR(200) NOT NULL,
+	[CoordX] INT NOT NULL,
+	[CoordY] INT NOT NULL,
+	[Price] DECIMAL NOT NULL
+)

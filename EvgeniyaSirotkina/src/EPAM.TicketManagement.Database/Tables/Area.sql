@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[Area]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
+	[LayoutId] INT NOT NULL,
+	[Description] NVARCHAR(200) NOT NULL,
+	[CoordX] INT NOT NULL,
+	[CoordY] INT NOT NULL,
+)

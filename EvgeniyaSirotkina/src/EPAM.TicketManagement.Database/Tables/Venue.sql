@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[Venue]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
+	[Name] NVARCHAR(75) NOT NULL,
+	[Description] NVARCHAR(120) NOT NULL,
+	[Address] NVARCHAR(200) NOT NULL,
+	[Phone] NVARCHAR(30),
+)
