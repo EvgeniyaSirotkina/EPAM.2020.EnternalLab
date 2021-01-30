@@ -1,4 +1,4 @@
-﻿namespace TicketManagement.DAL.Entities
+﻿namespace EPAM.TicketManagement.DAL.Entities
 {
     public class EventSeat
     {
