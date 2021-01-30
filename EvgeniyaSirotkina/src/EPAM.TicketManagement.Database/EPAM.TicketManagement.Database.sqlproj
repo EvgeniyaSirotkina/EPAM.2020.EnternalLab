@@ -56,5 +56,36 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="Tables" />
+    <Folder Include="ForeignKeys" />
+    <Folder Include="Post" />
+    <Folder Include="StoreProcedures" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Post\Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="StoreProcedures\CreateEventSeat.sql" />
+    <Build Include="StoreProcedures\CreateEventArea.sql" />
+    <Build Include="StoreProcedures\CreateEvent.sql" />
+    <Build Include="StoreProcedures\UpdateEvent.sql" />
+    <Build Include="StoreProcedures\UpdateEventSeat.sql" />
+    <Build Include="StoreProcedures\UpdateEventArea.sql" />
+    <Build Include="StoreProcedures\DeleteEventSeat.sql" />
+    <Build Include="StoreProcedures\DeleteEventArea.sql" />
+    <Build Include="StoreProcedures\DeleteEvent.sql" />
+    <Build Include="Tables\Area.sql" />
+    <Build Include="Tables\Event.sql" />
+    <Build Include="Tables\EventArea.sql" />
+    <Build Include="Tables\EventSeat.sql" />
+    <Build Include="Tables\Layout.sql" />
+    <Build Include="Tables\Seat.sql" />
+    <Build Include="Tables\Venue.sql" />
+    <Build Include="ForeignKeys\FK_Area_EventSeat.sql" />
+    <Build Include="ForeignKeys\FK_Area_Seat.sql" />
+    <Build Include="ForeignKeys\FK_Event_EventArea.sql" />
+    <Build Include="ForeignKeys\FK_Layout_Area.sql" />
+    <Build Include="ForeignKeys\FK_Layout_Event.sql" />
+    <Build Include="ForeignKeys\FK_Venue_Layout.sql" />
   </ItemGroup>
 </Project>
