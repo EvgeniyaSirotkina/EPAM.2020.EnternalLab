@@ -48,7 +48,9 @@
     <Compile Include="Entities\Seat.cs" />
     <Compile Include="Entities\Venue.cs" />
     <Compile Include="Entities\VenueLayout.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
