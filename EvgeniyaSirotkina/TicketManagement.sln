@@ -3,9 +3,30 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{423009CE-6E6A-477C-9711-C6D98E2494FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{60D58019-B6EC-4C71-AEB2-928547AC5CE8}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "EPAM.TicketManagement.Database", "src\EPAM.TicketManagement.Database\EPAM.TicketManagement.Database.sqlproj", "{D16F104E-F033-4A0C-B1D2-D4F3AAA2D4C7}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D16F104E-F033-4A0C-B1D2-D4F3AAA2D4C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D16F104E-F033-4A0C-B1D2-D4F3AAA2D4C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D16F104E-F033-4A0C-B1D2-D4F3AAA2D4C7}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D16F104E-F033-4A0C-B1D2-D4F3AAA2D4C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D16F104E-F033-4A0C-B1D2-D4F3AAA2D4C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D16F104E-F033-4A0C-B1D2-D4F3AAA2D4C7}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D16F104E-F033-4A0C-B1D2-D4F3AAA2D4C7} = {423009CE-6E6A-477C-9711-C6D98E2494FE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92B58905-9E2C-4C70-9F97-44BF31D5E6B6}
