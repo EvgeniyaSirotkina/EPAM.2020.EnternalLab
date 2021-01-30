@@ -50,6 +50,13 @@
     <Compile Include="Entities\VenueLayout.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\VenueLayoutRepository.cs" />
+    <Compile Include="Repositories\VenueRepository.cs" />
+    <Compile Include="Repositories\SeatRepository.cs" />
+    <Compile Include="Repositories\EventSeatRepository.cs" />
+    <Compile Include="Repositories\EventEntityRepository.cs" />
+    <Compile Include="Repositories\AreaRepository.cs" />
+    <Compile Include="Repositories\EventAreaRepository.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
