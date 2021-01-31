@@ -50,7 +50,7 @@
     <Compile Include="Entities\VenueLayout.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\VenueLayoutRepository.cs" />
+    <Compile Include="Repositories\LayoutRepository.cs" />
     <Compile Include="Repositories\VenueRepository.cs" />
     <Compile Include="Repositories\SeatRepository.cs" />
     <Compile Include="Repositories\EventSeatRepository.cs" />
