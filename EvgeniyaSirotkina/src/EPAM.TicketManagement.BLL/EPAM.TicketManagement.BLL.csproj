@@ -49,7 +49,9 @@
     <Compile Include="EntitiesDto\SeatDto.cs" />
     <Compile Include="EntitiesDto\SeatState.cs" />
     <Compile Include="EntitiesDto\VenueDto.cs" />
+    <Compile Include="Interfaces\IService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
