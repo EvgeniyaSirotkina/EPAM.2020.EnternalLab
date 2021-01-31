@@ -54,7 +54,7 @@
     <Compile Include="Repositories\VenueRepository.cs" />
     <Compile Include="Repositories\SeatRepository.cs" />
     <Compile Include="Repositories\EventSeatRepository.cs" />
-    <Compile Include="Repositories\EventEntityRepository.cs" />
+    <Compile Include="Repositories\EventRepository.cs" />
     <Compile Include="Repositories\AreaRepository.cs" />
     <Compile Include="Repositories\EventAreaRepository.cs" />
   </ItemGroup>

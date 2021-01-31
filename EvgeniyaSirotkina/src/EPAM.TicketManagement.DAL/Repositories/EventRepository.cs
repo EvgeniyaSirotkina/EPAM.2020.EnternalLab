@@ -7,11 +7,11 @@ using EPAM.TicketManagement.DAL.Interfaces;
 
 namespace EPAM.TicketManagement.DAL.Repositories
 {
-    internal class EventEntityRepository : IRepository<EventEntity>
+    internal class EventRepository : IRepository<EventEntity>
     {
         private readonly string _connectionString;
 
-        public EventEntityRepository(string connectionString)
+        public EventRepository(string connectionString)
         {
             _connectionString = connectionString;
         }
