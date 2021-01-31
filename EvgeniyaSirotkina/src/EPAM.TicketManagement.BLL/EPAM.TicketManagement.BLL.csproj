@@ -41,6 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntitiesDto\AreaDto.cs" />
+    <Compile Include="EntitiesDto\EventAreaDto.cs" />
+    <Compile Include="EntitiesDto\EventDto.cs" />
+    <Compile Include="EntitiesDto\EventSeatDto.cs" />
+    <Compile Include="EntitiesDto\LayoutDto.cs" />
+    <Compile Include="EntitiesDto\SeatDto.cs" />
+    <Compile Include="EntitiesDto\SeatState.cs" />
+    <Compile Include="EntitiesDto\VenueDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
