@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using AutoMapper;
 using EPAM.TicketManagement.BLL.EntitiesDto;
@@ -26,10 +27,19 @@ namespace EPAM.TicketManagement.BLL.Services
 
         public void Create(AreaDto item)
         {
+            if (item == null)
+            {
+                throw new CustomException("Null area object.");
+            }
+
+            if (GetAll().Any(a => a.LayoutId == item.LayoutId && a.Description == item.Description))
+            {
+                throw new CustomException("An area with such a description already exists in this layout.");
+            }
+
             try
             {
-                var area = _mapper.Map<AreaDto, Area>(item);
-                _areaRepository.Create(area);
+                _areaRepository.Create(_mapper.Map<AreaDto, Area>(item));
             }
             catch (Exception ex)
             {
@@ -44,7 +54,14 @@ namespace EPAM.TicketManagement.BLL.Services
 
         public IEnumerable<AreaDto> GetAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _mapper.Map<IEnumerable<Area>, IEnumerable<AreaDto>>(_areaRepository.GetAll());
+            }
+            catch (Exception ex)
+            {
+                throw new CustomException(ex.Message);
+            }
         }
 
         public AreaDto GetById(int id)
