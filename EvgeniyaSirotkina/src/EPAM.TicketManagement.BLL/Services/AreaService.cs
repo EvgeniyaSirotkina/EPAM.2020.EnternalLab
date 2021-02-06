@@ -49,7 +49,24 @@ namespace EPAM.TicketManagement.BLL.Services
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            if (id <= 0)
+            {
+                throw new CustomException("Id must be positive.");
+            }
+
+            if (GetById(id) == null)
+            {
+                throw new CustomException("The area you want to delete does not exist.");
+            }
+
+            try
+            {
+                _areaRepository.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomException(ex.Message);
+            }
         }
 
         public IEnumerable<AreaDto> GetAll()
@@ -66,7 +83,14 @@ namespace EPAM.TicketManagement.BLL.Services
 
         public AreaDto GetById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _mapper.Map<Area, AreaDto>(_areaRepository.GetById(id));
+            }
+            catch (Exception ex)
+            {
+                throw new CustomException(ex.Message);
+            }
         }
 
         public void Update(AreaDto item)

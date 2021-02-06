@@ -91,7 +91,7 @@ namespace EPAM.TicketManagement.UnitTests.Services
         }
 
         [Test]
-        public void Create_WhenNewAreaCannotBeSae_ShouldThrowCustomException()
+        public void Create_WhenNewAreaCannotBeSave_ShouldThrowCustomException()
         {
             // Arrange
             var areaDto = _fixture.Create<AreaDto>();
@@ -111,6 +111,78 @@ namespace EPAM.TicketManagement.UnitTests.Services
 
             // Act
             Action act = () => _service.Create(areaDto);
+
+            // Assert
+            act.Should().Throw<CustomException>()
+                .WithMessage(expectedErrorMessage);
+        }
+
+        [Test]
+        public void Delete_WhenDataIsValid_ShouldDeleteArea()
+        {
+            // Arrange
+            var areaId = 1;
+            var areaDto = _fixture.Build<AreaDto>().With(x => x.Id, areaId).Create();
+            var area = _fixture.Build<Area>().With(x => x.Id, areaId).Create();
+
+            _mockArea.Setup(x => x.GetById(areaId)).Returns(area);
+            _mockMapper.Setup(x => x.Map<Area, AreaDto>(area)).Returns(areaDto);
+            _mockArea.Setup(x => x.Delete(areaId)).Verifiable();
+
+            // Act
+            _service.Delete(areaId);
+
+            // Assert
+            _mockArea.Verify(x => x.Delete(areaId), Times.Once);
+        }
+
+        [Test]
+        public void Delete_WhenIdIsNegative_ShouldThrowCustomException()
+        {
+            // Arrange
+            var expectedErrorMessage = "Id must be positive.";
+
+            // Act
+            Action act = () => _service.Delete(0);
+
+            // Assert
+            act.Should().Throw<CustomException>()
+                .WithMessage(expectedErrorMessage);
+        }
+
+        [Test]
+        public void Delete_WhenAreaDoesntExist_ShouldThrowCustomException()
+        {
+            // Arrange
+            var areaId = 2;
+            Area area = null;
+            var expectedErrorMessage = "The area you want to delete does not exist.";
+            _mockArea.Setup(x => x.GetById(areaId)).Returns(area);
+
+            // Act
+            Action act = () => _service.Delete(areaId);
+
+            // Assert
+            act.Should().Throw<CustomException>()
+                .WithMessage(expectedErrorMessage);
+        }
+
+        [Test]
+        public void Delete_WhenAnAreaCannotBeDelete_ShouldThrowCustomException()
+        {
+            // Arrange
+            var areaId = 3;
+            var areaDto = _fixture.Build<AreaDto>().With(x => x.Id, areaId).Create();
+            var area = _fixture.Build<Area>().With(x => x.Id, areaId).Create();
+
+            _mockArea.Setup(x => x.GetById(areaId)).Returns(area);
+            _mockMapper.Setup(x => x.Map<Area, AreaDto>(area)).Returns(areaDto);
+            _mockArea.Setup(x => x.Delete(It.IsAny<int>())).Throws<Exception>();
+
+            var expectedErrorMessage = "Exception of type 'System.Exception' was thrown.";
+
+            // Act
+            Action act = () => _service.Delete(areaId);
 
             // Assert
             act.Should().Throw<CustomException>()
