@@ -10,6 +10,7 @@ using EPAM.TicketManagement.DAL.Entities;
 using EPAM.TicketManagement.DAL.Interfaces;
 
 [assembly: InternalsVisibleTo("EPAM.TicketManagement.UnitTests")]
+[assembly: InternalsVisibleTo("EPAM.TicketManagement.IntegrationTests")]
 
 namespace EPAM.TicketManagement.BLL.Services
 {

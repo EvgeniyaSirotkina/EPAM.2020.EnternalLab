@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Runtime.CompilerServices;
 using EPAM.TicketManagement.DAL.Entities;
 using EPAM.TicketManagement.DAL.Interfaces;
+
+[assembly: InternalsVisibleTo("EPAM.TicketManagement.IntegrationTests")]
 
 namespace EPAM.TicketManagement.DAL.Repositories
 {

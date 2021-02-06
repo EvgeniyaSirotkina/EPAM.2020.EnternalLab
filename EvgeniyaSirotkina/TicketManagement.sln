@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPAM.TicketManagement.BLL",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPAM.TicketManagement.UnitTests", "test\EPAM.TicketManagement.UnitTests\EPAM.TicketManagement.UnitTests.csproj", "{A55568FD-B9EA-4F35-A0F5-37C56ACF11B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPAM.TicketManagement.IntegrationTests", "test\EPAM.TicketManagement.IntegrationTests\EPAM.TicketManagement.IntegrationTests.csproj", "{4895AFB9-27FC-4237-B6BD-B53FA50CF087}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{A55568FD-B9EA-4F35-A0F5-37C56ACF11B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A55568FD-B9EA-4F35-A0F5-37C56ACF11B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A55568FD-B9EA-4F35-A0F5-37C56ACF11B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4895AFB9-27FC-4237-B6BD-B53FA50CF087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4895AFB9-27FC-4237-B6BD-B53FA50CF087}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4895AFB9-27FC-4237-B6BD-B53FA50CF087}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4895AFB9-27FC-4237-B6BD-B53FA50CF087}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
