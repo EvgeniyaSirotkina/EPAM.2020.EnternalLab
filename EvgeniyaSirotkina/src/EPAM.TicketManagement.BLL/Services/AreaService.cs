@@ -32,13 +32,15 @@ namespace EPAM.TicketManagement.BLL.Services
                 throw new CustomException("Null area object.");
             }
 
-            if (GetAll().Any(a => a.LayoutId == item.LayoutId && a.Description == item.Description))
-            {
-                throw new CustomException("An area with such a description already exists in this layout.");
-            }
-
             try
             {
+                var areas = _areaRepository.GetAll();
+
+                if (areas.Any(a => a.LayoutId == item.LayoutId && a.Description == item.Description))
+                {
+                    throw new CustomException("An area with such a description already exists in this layout.");
+                }
+
                 _areaRepository.Create(_mapper.Map<AreaDto, Area>(item));
             }
             catch (Exception ex)
@@ -54,13 +56,15 @@ namespace EPAM.TicketManagement.BLL.Services
                 throw new CustomException("Id must be positive.");
             }
 
-            if (GetById(id) == null)
-            {
-                throw new CustomException("The area you want to delete does not exist.");
-            }
-
             try
             {
+                var area = _areaRepository.GetById(id);
+
+                if (area == null)
+                {
+                    throw new CustomException("The area you want to delete does not exist.");
+                }
+
                 _areaRepository.Delete(id);
             }
             catch (Exception ex)
@@ -83,9 +87,21 @@ namespace EPAM.TicketManagement.BLL.Services
 
         public AreaDto GetById(int id)
         {
+            if (id <= 0)
+            {
+                throw new CustomException("Id must be positive.");
+            }
+
             try
             {
-                return _mapper.Map<Area, AreaDto>(_areaRepository.GetById(id));
+                var area = _areaRepository.GetById(id);
+
+                if (area == null)
+                {
+                    throw new CustomException("The area does not exist.");
+                }
+
+                return _mapper.Map<Area, AreaDto>(area);
             }
             catch (Exception ex)
             {
@@ -95,7 +111,26 @@ namespace EPAM.TicketManagement.BLL.Services
 
         public void Update(AreaDto item)
         {
-            throw new NotImplementedException();
+            if (item == null)
+            {
+                throw new CustomException("Null area object.");
+            }
+
+            try
+            {
+                var area = _areaRepository.GetById(item.Id);
+
+                if (area == null)
+                {
+                    throw new CustomException("The area you want to update does not exist.");
+                }
+
+                _areaRepository.Update(_mapper.Map<AreaDto, Area>(item));
+            }
+            catch (Exception ex)
+            {
+                throw new CustomException(ex.Message);
+            }
         }
     }
 }
