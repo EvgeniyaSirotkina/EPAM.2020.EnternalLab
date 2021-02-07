@@ -169,6 +169,65 @@ namespace EPAM.TicketManagement.IntegrationTests.Tests
                 .WithMessage(expectedErrorMessage);
         }
 
+        [Test]
+        public void Update_WhenAnAreaExistAndDataIsValid_SouldUpdateAnArea()
+        {
+            // Arrange
+            var newArea = _fixture.Build<AreaDto>()
+                .With(x => x.LayoutId, 1)
+                .Without(x => x.Id)
+                .Create();
+
+            _service.Create(newArea);
+            var areas = _service.GetAll();
+            var areaFromDb = areas
+                 .FirstOrDefault(x
+                 => x.LayoutId == newArea.LayoutId && x.Description == newArea.Description);
+
+            areaFromDb.Description = "Test Description Updated";
+
+            // Act
+            _service.Update(areaFromDb);
+
+            // Assert
+            var areasAfterCreateNewOne = _service.GetAll();
+            var updatedAreaFromDb = areasAfterCreateNewOne
+                .FirstOrDefault(x => x.LayoutId == areaFromDb.LayoutId && x.Description == areaFromDb.Description);
+
+            using (new AssertionScope())
+            {
+                updatedAreaFromDb.Should().NotBeNull();
+                updatedAreaFromDb.Description.Should().Be(areaFromDb.Description);
+                updatedAreaFromDb.LayoutId.Should().Be(areaFromDb.LayoutId);
+                updatedAreaFromDb.CoordX.Should().Be(areaFromDb.CoordX);
+                updatedAreaFromDb.CoordY.Should().Be(areaFromDb.CoordY);
+            }
+
+            // Remove data from db
+            _service.Delete(areaFromDb.Id);
+        }
+
+        [Test]
+        public void Update_WhenAnAreaDoesntExist_SouldUpdateAnArea()
+        {
+            // Arrange
+            var area = _fixture.Build<AreaDto>()
+                .With(x => x.Id, 10)
+                .With(x => x.LayoutId, 1)
+                .With(x => x.Description, "Test dscription")
+                .Without(x => x.Id)
+                .Create();
+
+            var expectedErrorMessage = "The area you want to update does not exist.";
+
+            // Act
+            Action act = () => _service.Update(area);
+
+            // Assert
+            act.Should().Throw<CustomException>()
+                .WithMessage(expectedErrorMessage);
+        }
+
         [OneTimeTearDown]
         public void DropDb()
         {
