@@ -117,7 +117,7 @@ namespace EPAM.TicketManagement.DAL.Repositories
             var queryString = "UPDATE [dbo].[Venue] SET " +
                                 "[Name] = @name, " +
                                 "[Description] = @description, " +
-                                "[Adress] = @adress, " +
+                                "[Address] = @address, " +
                                 "[Phone] = @phone " +
                                 "WHERE [Id] = @id";
 
@@ -128,7 +128,7 @@ namespace EPAM.TicketManagement.DAL.Repositories
                     command.Parameters.AddWithValue("@id", item.Id);
                     command.Parameters.AddWithValue("@name", item.Name);
                     command.Parameters.AddWithValue("@description", item.Description);
-                    command.Parameters.AddWithValue("@adress", item.Address);
+                    command.Parameters.AddWithValue("@address", item.Address);
                     command.Parameters.AddWithValue("@phone", item.Phone);
                     connection.Open();
                     command.ExecuteNonQuery();

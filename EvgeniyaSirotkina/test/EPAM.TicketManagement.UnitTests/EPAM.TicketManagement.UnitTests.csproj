@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\VenueServiceTests.cs" />
     <Compile Include="Services\AreaServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
