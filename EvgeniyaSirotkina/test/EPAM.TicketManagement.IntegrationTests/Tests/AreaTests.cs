@@ -66,29 +66,26 @@ namespace EPAM.TicketManagement.IntegrationTests.Tests
         public void Create_WnenDataIsValid_ShouldCreateNewArea()
         {
             // Arrange
-            var newArea = _fixture.Build<AreaDto>()
-                .With(x => x.LayoutId, 1)
-                .Without(x => x.Id)
-                .Create();
+            var testArea = TestArea();
 
             var areas = _service.GetAll();
 
             // Act
-            _service.Create(newArea);
+            _service.Create(testArea);
 
             // Assert
             var areasAfterCreateNewOne = _service.GetAll();
             areasAfterCreateNewOne.Should().HaveCount(areas.Count() + 1);
 
             var areaFromDb = areasAfterCreateNewOne
-                .FirstOrDefault(x => x.LayoutId == newArea.LayoutId && x.Description == newArea.Description);
+                .FirstOrDefault(x => x.LayoutId == testArea.LayoutId && x.Description == testArea.Description);
             using (new AssertionScope())
             {
                 areaFromDb.Should().NotBeNull();
-                areaFromDb.Description.Should().Be(newArea.Description);
-                areaFromDb.LayoutId.Should().Be(newArea.LayoutId);
-                areaFromDb.CoordX.Should().Be(newArea.CoordX);
-                areaFromDb.CoordY.Should().Be(newArea.CoordY);
+                areaFromDb.Description.Should().Be(testArea.Description);
+                areaFromDb.LayoutId.Should().Be(testArea.LayoutId);
+                areaFromDb.CoordX.Should().Be(testArea.CoordX);
+                areaFromDb.CoordY.Should().Be(testArea.CoordY);
             }
 
             // Remove data from db
@@ -99,26 +96,22 @@ namespace EPAM.TicketManagement.IntegrationTests.Tests
         public void Create_WnenAnAreaAlreadyExistInLayout_ShouldThrowCustomException()
         {
             // Arrange
-            var newArea = _fixture.Build<AreaDto>()
-                .With(x => x.LayoutId, 1)
-                .With(x => x.Description, "Test dscription")
-                .Without(x => x.Id)
-                .Create();
+            var testArea = TestArea();
 
             var expectedErrorMessage = "An area with such a description already exists in this layout.";
 
             var areas = _service.GetAll();
-            _service.Create(newArea);
+            _service.Create(testArea);
 
             // Act
-            Action act = () => _service.Create(newArea);
+            Action act = () => _service.Create(testArea);
 
             // Assert
             var areasAfterCreateNewOne = _service.GetAll();
             areasAfterCreateNewOne.Should().HaveCount(areas.Count() + 1);
 
             var areaFromDb = areasAfterCreateNewOne
-                .FirstOrDefault(x => x.LayoutId == newArea.LayoutId && x.Description == newArea.Description);
+                .FirstOrDefault(x => x.LayoutId == testArea.LayoutId && x.Description == testArea.Description);
             act.Should().Throw<CustomException>()
                 .WithMessage(expectedErrorMessage);
 
@@ -130,15 +123,12 @@ namespace EPAM.TicketManagement.IntegrationTests.Tests
         public void Delete_WnenAnAreaExist_ShouldDeleteAnArea()
         {
             // Arrange
-            var newArea = _fixture.Build<AreaDto>()
-                .With(x => x.LayoutId, 1)
-                .Without(x => x.Id)
-                .Create();
+            var testArea = TestArea();
 
-            _service.Create(newArea);
+            _service.Create(testArea);
             var areas = _service.GetAll();
             var areaFromDb = areas
-                 .FirstOrDefault(x => x.LayoutId == newArea.LayoutId && x.Description == newArea.Description);
+                 .FirstOrDefault(x => x.LayoutId == testArea.LayoutId && x.Description == testArea.Description);
 
             // Act
             _service.Delete(areaFromDb.Id);
@@ -152,17 +142,13 @@ namespace EPAM.TicketManagement.IntegrationTests.Tests
         public void Delete_WnenAnAreaDoesntExistInLayout_ShouldThrowCustomException()
         {
             // Arrange
-            var area = _fixture.Build<AreaDto>()
-                .With(x => x.Id, 10)
-                .With(x => x.LayoutId, 1)
-                .With(x => x.Description, "Test dscription")
-                .Without(x => x.Id)
-                .Create();
+            var testArea = TestArea();
+            testArea.Id = 10;
 
             var expectedErrorMessage = "The area you want to delete does not exist.";
 
             // Act
-            Action act = () => _service.Delete(area.Id);
+            Action act = () => _service.Delete(testArea.Id);
 
             // Assert
             act.Should().Throw<CustomException>()
@@ -173,16 +159,13 @@ namespace EPAM.TicketManagement.IntegrationTests.Tests
         public void Update_WhenAnAreaExistAndDataIsValid_SouldUpdateAnArea()
         {
             // Arrange
-            var newArea = _fixture.Build<AreaDto>()
-                .With(x => x.LayoutId, 1)
-                .Without(x => x.Id)
-                .Create();
+            var testArea = TestArea();
 
-            _service.Create(newArea);
+            _service.Create(testArea);
             var areas = _service.GetAll();
             var areaFromDb = areas
                  .FirstOrDefault(x
-                 => x.LayoutId == newArea.LayoutId && x.Description == newArea.Description);
+                 => x.LayoutId == testArea.LayoutId && x.Description == testArea.Description);
 
             areaFromDb.Description = "Test Description Updated";
 
@@ -211,17 +194,13 @@ namespace EPAM.TicketManagement.IntegrationTests.Tests
         public void Update_WhenAnAreaDoesntExist_SouldUpdateAnArea()
         {
             // Arrange
-            var area = _fixture.Build<AreaDto>()
-                .With(x => x.Id, 10)
-                .With(x => x.LayoutId, 1)
-                .With(x => x.Description, "Test dscription")
-                .Without(x => x.Id)
-                .Create();
+            var testArea = TestArea();
+            testArea.Id = 10;
 
             var expectedErrorMessage = "The area you want to update does not exist.";
 
             // Act
-            Action act = () => _service.Update(area);
+            Action act = () => _service.Update(testArea);
 
             // Assert
             act.Should().Throw<CustomException>()
@@ -241,5 +220,12 @@ namespace EPAM.TicketManagement.IntegrationTests.Tests
                 }
             }
         }
+
+        private AreaDto TestArea()
+            => _fixture.Build<AreaDto>()
+                .With(x => x.LayoutId, 1)
+                .With(x => x.Description, "Test Description")
+                .Without(x => x.Id)
+                .Create();
     }
 }
