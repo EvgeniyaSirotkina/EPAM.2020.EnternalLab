@@ -117,10 +117,10 @@ namespace EPAM.TicketManagement.DAL.Repositories
 
         public void Update(Area item)
         {
-            var queryString = "UPDATE [dbo].[Venue] SET " +
+            var queryString = "UPDATE [dbo].[Area] SET " +
                                 "[LayoutId] = @layoutId, " +
                                 "[Description] = @description, " +
-                                "[CoordX] = @coordX " +
+                                "[CoordX] = @coordX, " +
                                 "[CoordY] = @coordY " +
                                 "WHERE [Id] = @id";
 
