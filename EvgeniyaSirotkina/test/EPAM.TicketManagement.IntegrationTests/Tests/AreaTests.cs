@@ -42,7 +42,7 @@ namespace EPAM.TicketManagement.IntegrationTests.Tests
 
             var mappingConfig = new MapperConfiguration(mc =>
             {
-                mc.AddProfile(new AreaProfile());
+                mc.AddProfile(new ServiceProfile());
             });
             _mapper = mappingConfig.CreateMapper();
 

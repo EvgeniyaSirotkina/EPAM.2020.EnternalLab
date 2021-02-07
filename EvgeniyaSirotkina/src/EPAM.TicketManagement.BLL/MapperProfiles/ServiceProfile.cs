@@ -7,10 +7,12 @@ using EPAM.TicketManagement.DAL.Entities;
 
 namespace EPAM.TicketManagement.BLL.MapperProfiles
 {
-    internal class AreaProfile : Profile
+    internal class ServiceProfile : Profile
     {
-        public AreaProfile()
+        public ServiceProfile()
         {
+            CreateMap<Venue, VenueDto>().ReverseMap();
+
             CreateMap<Area, AreaDto>().ReverseMap();
         }
     }

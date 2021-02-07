@@ -51,7 +51,7 @@
     <Compile Include="EntitiesDto\VenueDto.cs" />
     <Compile Include="Exceptions\CustomException.cs" />
     <Compile Include="Interfaces\IService.cs" />
-    <Compile Include="MapperProfiles\AreaProfile.cs" />
+    <Compile Include="MapperProfiles\ServiceProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\VenueService.cs" />
     <Compile Include="Services\SeatService.cs" />
