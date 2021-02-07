@@ -1,9 +1,11 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using AutoFixture;
 using AutoMapper;
 using EPAM.TicketManagement.BLL.EntitiesDto;
+using EPAM.TicketManagement.BLL.Exceptions;
 using EPAM.TicketManagement.BLL.Interfaces;
 using EPAM.TicketManagement.BLL.MapperProfiles;
 using EPAM.TicketManagement.BLL.Services;
@@ -88,6 +90,37 @@ namespace EPAM.TicketManagement.IntegrationTests.Tests
                 areaFromDb.CoordX.Should().Be(newArea.CoordX);
                 areaFromDb.CoordY.Should().Be(newArea.CoordY);
             }
+
+            // Remove data from db
+            _service.Delete(areaFromDb.Id);
+        }
+
+        [Test]
+        public void Create_WnenAreaAlreadyExistInLayout_ShouldThrowCustomException()
+        {
+            // Arrange
+            var newArea = _fixture.Build<AreaDto>()
+                .With(x => x.LayoutId, 1)
+                .With(x => x.Description, "Test dscription")
+                .Without(x => x.Id)
+                .Create();
+
+            var expectedErrorMessage = "An area with such a description already exists in this layout.";
+
+            var areas = _service.GetAll();
+            _service.Create(newArea);
+
+            // Act
+            Action act = () => _service.Create(newArea);
+
+            // Assert
+            var areasAfterCreateNewOne = _service.GetAll();
+            areasAfterCreateNewOne.Should().HaveCount(areas.Count() + 1);
+
+            var areaFromDb = areasAfterCreateNewOne
+                .FirstOrDefault(x => x.LayoutId == newArea.LayoutId && x.Description == newArea.Description);
+            act.Should().Throw<CustomException>()
+                .WithMessage(expectedErrorMessage);
 
             // Remove data from db
             _service.Delete(areaFromDb.Id);
